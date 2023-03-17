@@ -49,5 +49,9 @@ void UMyGameInstance::Init()
 		NameProperty->GetValue_InContainer(Teacher, &CurrentTeacherName);
 		UE_LOG(LogTemp, Log, TEXT("현재 선생님 이름: %s"), *Teacher->GetName());
 		UE_LOG(LogTemp, Log, TEXT("현재 선생님 이름: %s"), *CurrentTeacherName);
+
+		CurrentTeacherName = TEXT("새선생");
+		NameProperty->SetValue_InContainer(Teacher, &CurrentTeacherName);
+		UE_LOG(LogTemp, Log, TEXT("새로운 선생님 이름: %s"), *Teacher->GetName());
 	}
 }
