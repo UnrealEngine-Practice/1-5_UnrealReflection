@@ -34,4 +34,20 @@ void UMyGameInstance::Init()
 
 
 	UE_LOG(LogTemp, Log, TEXT("==========================="));
+	UStudent* Student = NewObject<UStudent>();
+	UTeacher* Teacher = NewObject<UTeacher>();
+	//일반적인 방법으로 이름을 바꾸는 법
+	Student->SetName(TEXT("학생1"));
+	UE_LOG(LogTemp, Log, TEXT("새로운 학생 이름 : %s"), *Student->GetName());
+
+	// Reflection 시스템을 이용한 방법
+
+	FString CurrentTeacherName;
+	FProperty* NameProperty = UTeacher::StaticClass()->FindPropertyByName(TEXT("Name"));
+	if (NameProperty)
+	{
+		NameProperty->GetValue_InContainer(Teacher, &CurrentTeacherName);
+		UE_LOG(LogTemp, Log, TEXT("현재 선생님 이름: %s"), *Teacher->GetName());
+		UE_LOG(LogTemp, Log, TEXT("현재 선생님 이름: %s"), *CurrentTeacherName);
+	}
 }
