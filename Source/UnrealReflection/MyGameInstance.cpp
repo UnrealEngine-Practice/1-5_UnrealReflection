@@ -54,4 +54,16 @@ void UMyGameInstance::Init()
 		NameProperty->SetValue_InContainer(Teacher, &CurrentTeacherName);
 		UE_LOG(LogTemp, Log, TEXT("새로운 선생님 이름: %s"), *Teacher->GetName());
 	}
+
+
+	UE_LOG(LogTemp, Log, TEXT("==========================="));
+	Teacher->DoLesson(); 
+	// DoLesson이라는 이름의 함수(객체)를 찾는다.
+	UFunction* DoLessonFunc = Teacher->GetClass()->FindFunctionByName(TEXT("DoLesson"));
+	if (DoLessonFunc)
+	{
+		Teacher->ProcessEvent(DoLessonFunc, nullptr);
+	}
+	UE_LOG(LogTemp, Log, TEXT("==========================="));
+	UE_LOG(LogTemp, Log, TEXT("==========================="));
 }
